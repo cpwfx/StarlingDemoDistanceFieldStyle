@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:687fa8a82d5f56f6a4428ed5e8623ee3:c60f69dc0935c7b6a620089d6fe2b3f7:a379d27f9c74217e0f121afb2c42332d$ -->
+<TextureAtlas imagePath="mans.png" width="439" height="678">
+    <SubTexture name="df_manAnim0001" x="1" y="169" rotated="true" width="111" height="92" frameX="0" frameY="-20" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="df_manAnim0002" x="1" y="263" rotated="true" width="111" height="91" frameX="0" frameY="-20" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="df_manAnim0003" x="233" y="161" rotated="true" width="113" height="90" frameX="0" frameY="-17" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="df_manAnim0004" x="349" y="1" width="89" height="113" frameX="0" frameY="-14" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="df_manAnim0005" x="117" y="166" rotated="true" width="113" height="86" frameX="0" frameY="-9" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="df_manAnim0006" x="233" y="1" rotated="true" width="114" height="78" frameX="-5" frameY="-2" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="df_manAnim0007" x="233" y="81" rotated="true" width="114" height="78" frameX="-5" frameY="0" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="df_manAnim0008" x="232" y="253" rotated="true" width="113" height="78" frameX="-5" frameY="0" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="df_manAnim0009" x="117" y="86" rotated="true" width="114" height="78" frameX="-5" frameY="0" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="df_manAnim0010" x="1" y="89" rotated="true" width="114" height="78" frameX="-5" frameY="-2" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="df_manAnim0011" x="117" y="1" rotated="true" width="114" height="83" frameX="-2" frameY="-6" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="df_manAnim0012" x="1" y="1" rotated="true" width="114" height="86" frameX="0" frameY="-9" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="df_manAnim0013" x="349" y="116" width="88" height="113" frameX="0" frameY="-13" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="df_manAnim0014" x="348" y="231" width="90" height="112" frameX="0" frameY="-17" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="df_manAnim0015" x="114" y="254" rotated="true" width="111" height="92" frameX="0" frameY="-20" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="manB0001" x="339" y="345" width="88" height="105" frameX="0" frameY="-24" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="manB0002" x="345" y="559" width="87" height="105" frameX="0" frameY="-23" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="manB0003" x="1" y="571" width="87" height="106" frameX="0" frameY="-21" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="manB0004" x="178" y="571" width="84" height="106" frameX="-1" frameY="-17" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="manB0005" x="223" y="479" rotated="true" width="107" height="78" frameX="-4" frameY="-12" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="manB0006" x="226" y="406" rotated="true" width="108" height="71" frameX="-8" frameY="-5" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="manB0007" x="227" y="333" rotated="true" width="110" height="71" frameX="-8" frameY="-1" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="manB0008" x="114" y="348" rotated="true" width="110" height="71" frameX="-8" frameY="0" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="manB0009" x="1" y="356" rotated="true" width="110" height="71" frameX="-8" frameY="-1" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="manB0010" x="113" y="421" rotated="true" width="108" height="71" frameX="-8" frameY="-5" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="manB0011" x="110" y="494" rotated="true" width="107" height="75" frameX="-6" frameY="-9" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="manB0012" x="264" y="559" width="79" height="106" frameX="-4" frameY="-13" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="manB0013" x="1" y="429" rotated="true" width="107" height="82" frameX="-2" frameY="-16" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="manB0014" x="90" y="571" width="86" height="106" frameX="0" frameY="-20" frameWidth="96" frameHeight="131"/>
+    <SubTexture name="manB0015" x="336" y="452" width="88" height="105" frameX="0" frameY="-24" frameWidth="96" frameHeight="131"/>
+</TextureAtlas>

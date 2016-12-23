@@ -71,10 +71,8 @@ public class StarlingMain extends Sprite {
 
         ViewportUtil.setupViewPort(Starling.current, DEFAULT_CONTENTS_SIZE, true);
 
-        _assetManager.enqueue('assets/whiteMan_org.png');
-        _assetManager.enqueue('assets/whiteMan_org.xml');
-        _assetManager.enqueue('assets/whiteMan_df.png');
-        _assetManager.enqueue('assets/whiteMan_df.xml');
+        _assetManager.enqueue('assets/mans.png');
+        _assetManager.enqueue('assets/mans.xml');
 
         _assetManager.setBeforeTextureCreationCallback(function (name:String, bmd:BitmapData):BitmapData {
             return null;
@@ -100,17 +98,17 @@ public class StarlingMain extends Sprite {
         var style:DistanceFieldStyle;
         var mc:MovieClip;
 
-        mc = _locateAnim('ORG', 100, 40, 0xcccccc, 1.0);
+        mc = _locateAnim('manB', 100, 40, 0xcccccc, 1.0);
         _addTitle('ノーマルレンダリング 等倍', mc.x, mc.y);
         style = new DistanceFieldStyle();
-        mc = _locateAnim('manAnim', 250, 40, 0xcccccc, 1.0, style);
+        mc = _locateAnim('df_manAnim', 400, 40, 0xcccccc, 1.0, style);
         _addTitle('DistanceFieldレンダリング 等倍', mc.x, mc.y);
 
-        mc = _locateAnim('ORG', 200, 200, 0xffffff, 4.0);
+        mc = _locateAnim('manB', 200, 200, 0xffffff, 4.0);
         _addTitle('ノーマルレンダリング 拡大', mc.x, mc.y);
         _scaleMc(mc);
         style = new DistanceFieldStyle();
-        mc = _locateAnim('manAnim', 750, 200, 0xffffff, 4.0, style);
+        mc = _locateAnim('df_manAnim', 750, 200, 0xffffff, 4.0, style);
         _addTitle('DistanceFieldレンダリング 拡大', mc.x, mc.y);
         _scaleMc(mc);
 
@@ -150,7 +148,7 @@ public class StarlingMain extends Sprite {
 		if(autoDispose) {
             // しばらくしたら消す
             setTimeout(function () {
-                tf.dispose();
+                // tf.dispose();
             }, 10 * 1000);
 		}
 
