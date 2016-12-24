@@ -5,7 +5,6 @@ import flash.display.BitmapData;
 import flash.display.Stage;
 import flash.display3D.Context3DProfile;
 import flash.geom.Rectangle;
-import flash.text.TextFormatAlign;
 import flash.utils.setTimeout;
 
 import harayoki.starling2.filters.ScanLineFilter;
@@ -29,6 +28,7 @@ import starling.styles.DistanceFieldStyle;
 import starling.styles.MeshStyle;
 import starling.text.TextField;
 import starling.textures.Texture;
+import starling.utils.Align;
 
 public class StarlingMain extends Sprite {
 
@@ -119,7 +119,7 @@ public class StarlingMain extends Sprite {
             }
             visibleChanged = true;
             _textContainer.visible = ! _textContainer.visible;
-        }, 6000);
+        }, 10 * 1000);
 
         var style:DistanceFieldStyle;
         var mc:MovieClip;
@@ -127,92 +127,104 @@ public class StarlingMain extends Sprite {
         var sp:Sprite;
 
         style = new DistanceFieldStyle();
-        mc = _locateAnim("df_manAnim", 100, 100, 1.0, style);
-        _addTitle("等倍 未着色", mc.x, mc.bounds.bottom);
+        mc = _locateAnim("df_manAnim", 80, 100, 1.0);
+        mc.style = style;
+        _addTitle("1x", mc.x, mc.bounds.bottom);
 
         style = new DistanceFieldStyle();
-        mc = _locateAnim("df_manAnim", 200, 100, 2.0, style);
+        mc = _locateAnim("df_manAnim", 200, 100, 2.0);
+        mc.style = style;
         mc.color = 0x88ff00;
-        _addTitle("2倍 着色", mc.x, mc.bounds.bottom);
+        _addTitle("2x, colored", mc.x, mc.bounds.bottom);
 
         style = new DistanceFieldStyle();
-        mc = _locateAnim("df_manAnim", 400, 100, 2.0, style);
+        mc = _locateAnim("df_manAnim", 400, 100, 2.0);
+        mc.style = style;
         mc.color = 0xff00ff;
-        _addTitle("2倍 頂点着色", mc.x, mc.bounds.bottom);
+        _addTitle("2x, vertex colored", mc.x, mc.bounds.bottom);
         _applyRandomColorToImage(mc);
 
         style = new DistanceFieldStyle();
         style.setupOutline();
-        mc = _locateAnim("df_manAnim", 600, 100, 2.0, style);
-        _addTitle("2倍 枠線", mc.x, mc.bounds.bottom);
+        mc = _locateAnim("df_manAnim", 600, 100, 2.0);
+        mc.style = style;
+        _addTitle("2x, border(DistanceField)", mc.x, mc.bounds.bottom);
 
         style = new DistanceFieldStyle();
         style.setupDropShadow(0.2,4, 4);
-        mc = _locateAnim("df_manAnim", 800, 100, 2.0, style);
-        _addTitle("2倍 シャドウ", mc.x, mc.bounds.bottom);
+        mc = _locateAnim("df_manAnim", 800, 100, 2.0);
+        mc.style = style;
+        _addTitle("2x, shadow(DistanceField)", mc.x, mc.bounds.bottom);
 
         style = new DistanceFieldStyle();
         style.setupGlow();
-        mc = _locateAnim("df_manAnim", 1000, 100, 2.0, style);
-        _addTitle("2倍 グロウ", mc.x, mc.bounds.bottom);
+        mc = _locateAnim("df_manAnim", 1000, 100, 2.0);
+        mc.style = style;
+        _addTitle("2x, glow(DistanceField)", mc.x, mc.bounds.bottom);
 
         style = new DistanceFieldStyle();
-        mc = _locateAnim("df_manAnim", 200, 350, 2.0, style);
+        mc = _locateAnim("df_manAnim", 150, 400, 2.0);
+        mc.style = style;
         mc.color = 0xff00ff;
         mc.filter = new SlashShadedFilter(4, 0xffffff, 1);
-        _addTitle("2倍 着色 + my filter1", mc.x, mc.bounds.bottom);
+        _addTitle("2x, colored, CustomFilter1", mc.x, mc.bounds.bottom);
 
         style = new DistanceFieldStyle();
-        mc = _locateAnim("df_manAnim", 400, 350, 2.0, style);
+        mc = _locateAnim("df_manAnim", 350, 400, 2.0);
+        mc.style = style;
         mc.color = 0xff00ff;
         mc.filter = new ScanLineFilter(1);
         _applyRandomColorToImage(mc);
-        _addTitle("2倍 頂点着色 + my filter2", mc.x, mc.bounds.bottom);
+        _addTitle("2x, vertex colored,\nCustomFilter2", mc.x, mc.bounds.bottom);
 
         style = new DistanceFieldStyle();
         style.setupOutline();
-        mc = _locateAnim("df_manAnim", 600, 350, 2.0, style);
+        mc = _locateAnim("df_manAnim", 550, 400, 2.0);
+        mc.style = style;
         mc.color = 0xff8800;
         mc.filter = new GlowFilter()
-        _addTitle("2倍 枠線 + グロウフィルタ", mc.x, mc.bounds.bottom);
+        _addTitle("2x, border(DistanceField),\n GlowFilter", mc.x, mc.bounds.bottom);
 
         style = new DistanceFieldStyle();
         style.setupOutline();
-        mc = _locateAnim("df_manAnim", 850, 350, 6.0, style);
+        mc = _locateAnim("df_manAnim", 850, 350, 6.0);
+        mc.style = style;
         mc.color = 0xff8800;
         mc.filter = new FilterChain(new ScanLineFilter(4, 30 , 3, 0x993366, 1.0), new GlowFilter(0x00ffff,1,2));
         _applyRandomColorToImage(mc);
-        _addTitle("6倍 頂点着色 + 枠線 + my filter2 + グロウフィルタ", mc.x, mc.bounds.bottom);
+        _addTitle("6x, vertex colored, border(DistanceField), CustomFilter2, GlowFilter", mc.x, mc.bounds.bottom, 0);
 
+        //////////
 
         style = new DistanceFieldStyle();
         style.setupOutline();
-        image = _addImage("df_manAnim", 100, 600, 1.0);
+        image = _addImage("df_manAnim", 80, 650, 1.0);
         image.scale9Grid = new Rectangle(35,60,20,30);
         image.style = style;
         _applyRandomColorToImage(image, 35);
-        _addTitle("9スケール + 頂点着色", image.x, image.bounds.bottom);
+        _addTitle("9scaleGrid(Image),\n vertex colored", image.x, image.bounds.bottom);
 
         style = new DistanceFieldStyle();
         style.setupOutline();
-        image = _addImage("df_manAnim", 250, 600, 1.0);
-        image.scaleY = 1.5;
-        image.scale9Grid = new Rectangle(35,75,20,20);
+        image = _addImage("df_manAnim", 200, 650, 1.0);
+        image.scaleY = 1.9;
+        image.scale9Grid = new Rectangle(35,80,15,20);
         image.style = style;
-        _applyRandomColorToImage(image, 35);
-        _addTitle("9スケール + 拡大 + 頂点着色", image.x, image.bounds.bottom);
+        image.color = 0x33ffcc;
+        _addTitle("9scaleGrid(Image), border(DistanceField),\n scaling(Y), colored", image.x, image.bounds.bottom);
 
         style = new DistanceFieldStyle();
         style.setupOutline();
-        mc = _locateAnim("df_manAnim", 500, 600 + 50 , 1.0, style);
+        mc = _locateAnim("df_manAnim", 500, 650 + 50 , 1.0);
+        mc.style = style;
         mc.scaleY = 1.5;
         mc.scale9Grid = new Rectangle(35,75,20,20);
         _applyRandomColorToImage(mc, 35);
-        _addTitle("9スケール + 拡大 + 頂点着色 + anime", mc.x, mc.bounds.bottom);
+        _addTitle("9scaleGrid(MovieClip), border(DistanceField),\n scaling(Y), vertex colored", mc.x, mc.bounds.bottom);
 
     }
 
-    private function _locateAnim(imageName:String, xx:int, yy:int, scale:Number=1.0, style:DistanceFieldStyle = null):MovieClip {
+    private function _locateAnim(imageName:String, xx:int, yy:int, scale:Number=1.0):MovieClip {
 
         var textures:Vector.<Texture> = _assetManager.getTextures(imageName);
         var mc:MovieClip = new MovieClip(textures, 60);
@@ -221,7 +233,6 @@ public class StarlingMain extends Sprite {
         mc.pivotX = mc.width >> 2;
         mc.pivotY = mc.height >> 2;
         mc.scale = scale;
-        mc.style = style;
         _animationContainer.addChild(mc);
         _juggler.add(mc);
 
@@ -229,25 +240,24 @@ public class StarlingMain extends Sprite {
 
     }
 
-    private function _addImage(imageName:String, xx:int, yy:int, scale:Number=1.0, style:MeshStyle = null):Image {
+    private function _addImage(imageName:String, xx:int, yy:int, scale:Number=1.0):Image {
         var textures:Vector.<Texture> = _assetManager.getTextures(imageName);
         var texture:Texture = textures[0];
         var image:Image = new Image(texture);
         image.x = xx;
         image.y = yy;
         image.scale = scale;
-        image.style = style;
         _animationContainer.addChild(image);
         return image;
     }
 
-    private function _addTitle(title:String, xx:int, yy:int, color:Number= 0x00ffff):void {
+    private function _addTitle(title:String, xx:int, yy:int, dy:int = 70, color:Number= 0xccffff):void {
 
-        var tf:TextField = new TextField(300, 20, title);
+        var tf:TextField = new TextField(500, 100, title);
         tf.x = xx;
-        tf.y = yy;
+        tf.y = yy + dy;
         tf.format.color = color;
-        tf.alignPivot(TextFormatAlign.CENTER, TextFormatAlign.CENTER);
+        tf.alignPivot(Align.CENTER, Align.BOTTOM);
         tf.batchable = true;
         _textContainer.addChild(tf);
 
