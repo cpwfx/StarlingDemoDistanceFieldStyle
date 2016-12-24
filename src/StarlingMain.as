@@ -8,11 +8,8 @@ import flash.geom.Rectangle;
 import flash.text.TextFormatAlign;
 import flash.utils.setTimeout;
 
-import harayoki.starling2.filters.PosterizationFilter;
 import harayoki.starling2.filters.ScanLineFilter;
-
 import harayoki.starling2.filters.SlashShadedFilter;
-
 import harayoki.starling2.utils.AssetManager;
 
 import misc.ViewportUtil;
@@ -21,10 +18,8 @@ import starling.animation.Juggler;
 import starling.core.Starling;
 import starling.display.BlendMode;
 import starling.display.Image;
-import starling.display.Mesh;
 import starling.display.MovieClip;
 import starling.display.Sprite;
-import starling.events.EnterFrameEvent;
 import starling.events.Event;
 import starling.events.TouchEvent;
 import starling.events.TouchPhase;
@@ -64,6 +59,8 @@ public class StarlingMain extends Sprite {
 
     private var _assetManager:AssetManager;
     private var _juggler:Juggler;
+    private var _textContainer:Sprite;
+    private var _animationContainer:Sprite;
 
     public function StarlingMain() {
 
@@ -79,8 +76,8 @@ public class StarlingMain extends Sprite {
 
         ViewportUtil.setupViewPort(Starling.current, DEFAULT_CONTENTS_SIZE, true);
 
-        _assetManager.enqueue('assets/mans.png');
-        _assetManager.enqueue('assets/mans.xml');
+        _assetManager.enqueue("assets/mans.png");
+        _assetManager.enqueue("assets/mans.xml");
 
         _assetManager.setBeforeTextureCreationCallback(function (name:String, bmd:BitmapData):BitmapData {
             return null;
@@ -103,68 +100,89 @@ public class StarlingMain extends Sprite {
         _juggler.timeScale = 0.25; // システム60fpsなのでアニメ15fpsに合わせている
         Starling.juggler.add(_juggler);
 
+        _animationContainer = new Sprite();
+        addChild(_animationContainer);
+
+        _textContainer = new Sprite();
+        addChild(_textContainer);
+
+        var visibleChanged:Boolean = false;
+        stage.addEventListener(TouchEvent.TOUCH, function(ev:TouchEvent):void {
+            if(ev.touches[0].phase === TouchPhase.BEGAN) {
+                visibleChanged = true;
+                _textContainer.visible = ! _textContainer.visible;
+            }
+        });
+        setTimeout(function():void{
+            if(visibleChanged) {
+                return;
+            }
+            visibleChanged = true;
+            _textContainer.visible = ! _textContainer.visible;
+        }, 6000);
+
         var style:DistanceFieldStyle;
         var mc:MovieClip;
         var image:Image;
         var sp:Sprite;
 
         style = new DistanceFieldStyle();
-        mc = _locateAnim('df_manAnim', 100, 100, 1.0, style);
-        _addTitle('等倍 未着色', mc.x, mc.bounds.bottom);
+        mc = _locateAnim("df_manAnim", 100, 100, 1.0, style);
+        _addTitle("等倍 未着色", mc.x, mc.bounds.bottom);
 
         style = new DistanceFieldStyle();
-        mc = _locateAnim('df_manAnim', 200, 100, 2.0, style);
+        mc = _locateAnim("df_manAnim", 200, 100, 2.0, style);
         mc.color = 0x88ff00;
-        _addTitle('2倍 着色', mc.x, mc.bounds.bottom);
+        _addTitle("2倍 着色", mc.x, mc.bounds.bottom);
 
         style = new DistanceFieldStyle();
-        mc = _locateAnim('df_manAnim', 400, 100, 2.0, style);
+        mc = _locateAnim("df_manAnim", 400, 100, 2.0, style);
         mc.color = 0xff00ff;
-        _addTitle('2倍 頂点着色', mc.x, mc.bounds.bottom);
+        _addTitle("2倍 頂点着色", mc.x, mc.bounds.bottom);
         _applyRandomColorToImage(mc);
 
         style = new DistanceFieldStyle();
         style.setupOutline();
-        mc = _locateAnim('df_manAnim', 600, 100, 2.0, style);
-        _addTitle('2倍 枠線', mc.x, mc.bounds.bottom);
+        mc = _locateAnim("df_manAnim", 600, 100, 2.0, style);
+        _addTitle("2倍 枠線", mc.x, mc.bounds.bottom);
 
         style = new DistanceFieldStyle();
         style.setupDropShadow(0.2,4, 4);
-        mc = _locateAnim('df_manAnim', 800, 100, 2.0, style);
-        _addTitle('2倍 シャドウ', mc.x, mc.bounds.bottom);
+        mc = _locateAnim("df_manAnim", 800, 100, 2.0, style);
+        _addTitle("2倍 シャドウ", mc.x, mc.bounds.bottom);
 
         style = new DistanceFieldStyle();
         style.setupGlow();
-        mc = _locateAnim('df_manAnim', 1000, 100, 2.0, style);
-        _addTitle('2倍 グロウ', mc.x, mc.bounds.bottom);
+        mc = _locateAnim("df_manAnim", 1000, 100, 2.0, style);
+        _addTitle("2倍 グロウ", mc.x, mc.bounds.bottom);
 
         style = new DistanceFieldStyle();
-        mc = _locateAnim('df_manAnim', 200, 350, 2.0, style);
+        mc = _locateAnim("df_manAnim", 200, 350, 2.0, style);
         mc.color = 0xff00ff;
         mc.filter = new SlashShadedFilter(4, 0xffffff, 1);
-        _addTitle('2倍 着色 + my filter1', mc.x, mc.bounds.bottom);
+        _addTitle("2倍 着色 + my filter1", mc.x, mc.bounds.bottom);
 
         style = new DistanceFieldStyle();
-        mc = _locateAnim('df_manAnim', 400, 350, 2.0, style);
+        mc = _locateAnim("df_manAnim", 400, 350, 2.0, style);
         mc.color = 0xff00ff;
         mc.filter = new ScanLineFilter(1);
         _applyRandomColorToImage(mc);
-        _addTitle('2倍 頂点着色 + my filter2', mc.x, mc.bounds.bottom);
+        _addTitle("2倍 頂点着色 + my filter2", mc.x, mc.bounds.bottom);
 
         style = new DistanceFieldStyle();
         style.setupOutline();
-        mc = _locateAnim('df_manAnim', 600, 350, 2.0, style);
+        mc = _locateAnim("df_manAnim", 600, 350, 2.0, style);
         mc.color = 0xff8800;
         mc.filter = new GlowFilter()
-        _addTitle('2倍 枠線 + グロウフィルタ', mc.x, mc.bounds.bottom);
+        _addTitle("2倍 枠線 + グロウフィルタ", mc.x, mc.bounds.bottom);
 
         style = new DistanceFieldStyle();
         style.setupOutline();
-        mc = _locateAnim('df_manAnim', 850, 350, 6.0, style);
+        mc = _locateAnim("df_manAnim", 850, 350, 6.0, style);
         mc.color = 0xff8800;
-        mc.filter = new FilterChain(new ScanLineFilter(3), new GlowFilter(0x00ffff,1,2));
+        mc.filter = new FilterChain(new ScanLineFilter(4, 30 , 3, 0x993366, 1.0), new GlowFilter(0x00ffff,1,2));
         _applyRandomColorToImage(mc);
-        _addTitle('6倍 頂点着色 + 枠線 + my filter2 + グロウフィルタ', mc.x, mc.bounds.bottom);
+        _addTitle("6倍 頂点着色 + 枠線 + my filter2 + グロウフィルタ", mc.x, mc.bounds.bottom);
 
 
         style = new DistanceFieldStyle();
@@ -173,7 +191,7 @@ public class StarlingMain extends Sprite {
         image.scale9Grid = new Rectangle(35,60,20,30);
         image.style = style;
         _applyRandomColorToImage(image, 35);
-        _addTitle('9スケール + 頂点着色', image.x, image.bounds.bottom);
+        _addTitle("9スケール + 頂点着色", image.x, image.bounds.bottom);
 
         style = new DistanceFieldStyle();
         style.setupOutline();
@@ -182,15 +200,15 @@ public class StarlingMain extends Sprite {
         image.scale9Grid = new Rectangle(35,75,20,20);
         image.style = style;
         _applyRandomColorToImage(image, 35);
-        _addTitle('9スケール + 拡大 + 頂点着色', image.x, image.bounds.bottom);
+        _addTitle("9スケール + 拡大 + 頂点着色", image.x, image.bounds.bottom);
 
         style = new DistanceFieldStyle();
         style.setupOutline();
-        mc = _locateAnim('df_manAnim', 500, 600 + 50 , 1.0, style);
+        mc = _locateAnim("df_manAnim", 500, 600 + 50 , 1.0, style);
         mc.scaleY = 1.5;
         mc.scale9Grid = new Rectangle(35,75,20,20);
         _applyRandomColorToImage(mc, 35);
-        _addTitle('9スケール + 拡大 + 頂点着色 + anime', mc.x, mc.bounds.bottom);
+        _addTitle("9スケール + 拡大 + 頂点着色 + anime", mc.x, mc.bounds.bottom);
 
     }
 
@@ -204,7 +222,7 @@ public class StarlingMain extends Sprite {
         mc.pivotY = mc.height >> 2;
         mc.scale = scale;
         mc.style = style;
-        addChild(mc);
+        _animationContainer.addChild(mc);
         _juggler.add(mc);
 
         return mc;
@@ -219,11 +237,11 @@ public class StarlingMain extends Sprite {
         image.y = yy;
         image.scale = scale;
         image.style = style;
-        addChildAt(image, 0);
+        _animationContainer.addChild(image);
         return image;
     }
 
-    private function _addTitle(title:String, xx:int, yy:int, color:Number= 0x00ffff, autoDispose:Boolean=true):void {
+    private function _addTitle(title:String, xx:int, yy:int, color:Number= 0x00ffff):void {
 
         var tf:TextField = new TextField(300, 20, title);
         tf.x = xx;
@@ -231,35 +249,12 @@ public class StarlingMain extends Sprite {
         tf.format.color = color;
         tf.alignPivot(TextFormatAlign.CENTER, TextFormatAlign.CENTER);
         tf.batchable = true;
-        addChild(tf);
-		if(autoDispose) {
-            // しばらくしたら消す
-            setTimeout(function () {
-                 tf.dispose();
-            }, 10 * 1000);
-		}
+        _textContainer.addChild(tf);
 
     }
 
-	private function _scaleMc(mc:MovieClip):void {
-        var theta:Number = 0;
-		var scale = mc.scale;
-        var orgScale = mc.scale;
-        mc.addEventListener(TouchEvent.TOUCH, function (ev:TouchEvent):void {
-            var phase:String = ev.touches[0].phase;
-            if (phase == TouchPhase.BEGAN) {
-                theta += 0.7;
-            }
-        });
-		addEventListener(EnterFrameEvent.ENTER_FRAME, function(ev):void {
-            theta += 0.001;
-			scale = orgScale + ( 1 + Math.sin(-theta) ) * orgScale;
-            mc.scale = scale;
-        });
-    }
 
-
-    private function _randomColor():uint {
+    private function _getRandomColor():uint {
         var r:int = 255 * (0.1 + Math.random()*0.9);
         var g:int = 255 * (0.1 + Math.random()*0.9);
         var b:int = 255 * (0.1 + Math.random()*0.9);
@@ -268,43 +263,10 @@ public class StarlingMain extends Sprite {
 
     private function _applyRandomColorToImage(image:Image, numVertex:int=4):void {
         while(numVertex--) {
-            image.setVertexColor(numVertex, _randomColor());
+            image.setVertexColor(numVertex, _getRandomColor());
         }
     }
 
-//    private function _createMeshedImage(imageName:String, px:int, py:int, scale:Number=1.0, style:MeshStyle = null):Sprite {
-//        var sp = new Sprite();
-//        sp.x = px;
-//        sp.y = py;
-//        sp.scale = scale;
-//        var textures:Vector.<Texture> = _assetManager.getTextures(imageName);
-//        var texture:Texture = textures[0];
-//        var image:Image;
-//        var divX:int = 2;
-//        var divY:int = 2;
-//        var du:Number = 1 / divX;
-//        var dv:Number = 1 / divY;
-//        var dw:Number = texture.nativeWidth / divX;
-//        var dh:Number = texture.nativeHeight / divY;
-//        for (var yy:int=0 ; yy<divY; yy++) {
-//            for (var xx:int=0 ; xx<divX; xx++) {
-//                image = new Image(texture);
-//                image.setTexCoords(0, du * xx, dv * yy);
-//                image.setTexCoords(1, du * (1 + xx), dv * yy);
-//                image.setTexCoords(2, du * xx, dv * (yy + 1));
-//                image.setTexCoords(3, du * (1 + xx), dv * (yy + 1));
-//                image.width  = dw;
-//                image.height = dh;
-//                image.x = dw * xx;
-//                image.y = dh * yy;
-//                image.style = new DistanceFieldStyle();
-//                _applyRandomColorToImage(image);
-//                sp.addChild(image);
-//            }
-//        }
-//        addChildAt(sp , 0);
-//        return sp;
-//    }
 }
 
 }
