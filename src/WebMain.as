@@ -15,7 +15,7 @@ public class WebMain extends Sprite {
         stage.scaleMode = StageScaleMode.NO_SCALE;
         stage.frameRate = 60;
         stage.quality = StageQuality.LOW;
-        stage.color = 0x111111;
+        stage.color = 0x333333;
         addEventListener(Event.ADDED_TO_STAGE, _init);
     }
 

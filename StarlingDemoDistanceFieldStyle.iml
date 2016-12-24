@@ -31,7 +31,7 @@
     </content>
     <orderEntry type="jdk" jdkName="AIRSDK24" jdkType="Flex SDK Type (new)" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="starling" level="project" />
     <orderEntry type="library" exported="" name="as3-signals-v0.8" level="project" />
+    <orderEntry type="library" exported="" name="starling" level="project" />
   </component>
 </module>
